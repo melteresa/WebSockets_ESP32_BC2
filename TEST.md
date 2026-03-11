@@ -1,7 +1,7 @@
 # Cuestionario de Evaluación: Comunicación por Sockets 📝
 
-**Nombre del Estudiante:** _______________________
-**Fecha:** _______________________
+**Nombre del Estudiante:**  Melany Terán
+**Fecha:** 11/03/2026
 
 *Instrucciones: Responde a las siguientes preguntas basándote en la teoría de redes y en el análisis del código de nuestro proyecto. Sube este archivo con tus respuestas a tu repositorio como evidencia de trabajo.*
 
