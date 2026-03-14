@@ -25,16 +25,28 @@
 
 6. **Analizando nuestro código: ¿Quién actúa como Servidor y quién actúa como Cliente? (Justifica tu respuesta mencionando qué funciones del código lo demuestran, ej. `bind()`, `connect()`).**
    > *ESP32: Servidor.
-      Porque espera conexiones y atiende solicitudes de la PC. Se demuestra en funciones como: *
+      Porque espera conexiones y atiende solicitudes de la PC. Se demuestra en funciones como: bind() y listen(). En el código:
+   - server.bind(('0.0.0.0', 80)) → abre el puerto.
+   - server.listen(1) → queda esperando conexiones.
+   - conn, addr = server.accept() → acepta la conexión de la PC.
+   > PC (en Python): Cliente.
+      Porque se conecta al servidor (ESP32) para enviar y recibir datos. Se demuestra en la función connect(). En el código:
+  -  sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) → crea el socket del cliente.
+  - sock.connect((IP_ESP32, PUERTO)) → la PC se conecta al ESP32 usando su IP y puerto.
+   Además, desde el cliente se envían comandos al servidor: sock.send(b'ON') y sock.send(b'OFF')*
 
 7. **En el código de la computadora (Python), importamos la librería `threading` (Hilos). ¿Qué pasaría con la ventana de Tkinter si no usáramos hilos para recibir los datos de la red?**
-   > *Tu respuesta aquí*
+   > *Si no usáramos hilos, la ventana de Tkinter se quedaría pegada o congelada.
+   Esto pasa porque el programa estaría ocupado recibiendo datos de la red todo el tiempo y no tendría tiempo para actualizar la ventana o responder a los botones.*
 
 8. **¿Por qué es necesario usar bloques `try...except` cuando trabajamos con conexiones de red e Internet?**
-   > *Tu respuesta aquí*
+   > *Es necesario usar try...except porque en las conexiones de red pueden ocurrir errores inesperados.
+   Por ejemplo: se puede perder la conexión WiFi, el ESP32 o la PC pueden desconectarse, pueden llegar datos incorrectos.
+      Si no usamos try...except, el programa se cerraría con un error.
+      En cambio, con try...except el programa detecta el error y sigue funcionando.*
 
 9. **En la función de encender el LED en Python, enviamos el comando así: `sock.send(b'ON')`. ¿Qué significa esa letra `b` antes de las comillas y por qué no enviamos un texto normal?**
-   > *Tu respuesta aquí*
+   > *La "b" antes de las comillas significa que el mensaje se envía en bytes. Esto es necesario porque las conexiones de red (sockets) solo pueden enviar datos en formato de bytes y no texto normal. Por eso usamos sock.send(b'ON'), para que el comando pueda enviarse correctamente al ESP32.*
 
 10. **Describe brevemente el flujo de datos: ¿Qué camino recorre la información desde que giras el potenciómetro físicamente hasta que la barra se mueve en la pantalla de la computadora?**
-    > *Tu respuesta aquí*
+    > *Al girar el potenciómetro, el ESP32 lee el valor analógico y lo convierte en un número digital. Luego envía ese valor por WiFi a la computadora. La PC recibe el dato en un hilo, lo convierte en número y actualiza la barra de progreso de Tkinter, haciendo que se mueva en la pantalla.*
