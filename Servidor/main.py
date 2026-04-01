@@ -69,8 +69,9 @@ lbl_valor.grid(row=1, column=0, columnspan=2)
 progress = ttk.Progressbar(root, length=200, maximum=4095)
 progress.grid(row=2, column=0, columnspan=2, padx=20, pady=10)
 
-tk.Button(root, text="Encender LED", command=led_on, bg="green", fg="white").grid(row=3, column=0, padx=10, pady=10)
-tk.Button(root, text="Apagar LED", command=led_off, bg="red", fg="white").grid(row=3, column=1, padx=10, pady=10)
+# Botones morados
+tk.Button(root, text="Encender LED", command=led_on, bg="#800080", fg="white").grid(row=3, column=0, padx=10, pady=10)
+tk.Button(root, text="Apagar LED", command=led_off, bg="#800080", fg="white").grid(row=3, column=1, padx=10, pady=10)
 
 threading.Thread(target=conectar, daemon=True).start()
 
